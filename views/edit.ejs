@@ -1,0 +1,15 @@
+
+<%- include('./patials/header') %>
+
+<div class="container mt-5">
+
+    <form action="/edit/todo/<%= todo._id %>" method="POST">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Chỉnh sửa</label>
+            <textarea name="Editcontent" class="form-control" id="exampleInputPassword1" rows="4" cols="50"><%= todo.todo %></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+    </form>
+    
+</div>
+<%- include('./patials/footer') %>

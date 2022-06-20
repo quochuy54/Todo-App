@@ -14,8 +14,12 @@
         <ul class="list-group mt-5">
             
             <% allTodo.forEach(todos => { %>
-                <li class="list-group-item"><%= todos.todo %>
-                <a href="/delete/todo/<%= todos._id %>">Delete</a></li>
+                <li class="list-group-item d-flex justify-content-between"><%= todos.todo %>
+                <div class="">
+                    <a href="/edit/todo/<%= todos._id %>"><button class="btn btn-warning mr-3">Edit</button></a>
+                    <a href="/delete/todo/<%= todos._id %>"><button class="btn btn-danger">Delete</button></a>
+                </div>
+                </li>
             <% }) %>
             
         </ul>

@@ -1,8 +1,7 @@
 const Todo = require('../models/Todo');
 const router = require('express').Router()
 
-
-
+// [POST] /add/todo
 router.post('/add/todo', (req, res) => {
     const {todo} = req.body;
     const newTodo = new Todo({todo})
@@ -15,6 +14,31 @@ router.post('/add/todo', (req, res) => {
     .catch(err => console.log(err))
 })
 
+
+//[GET] /edit/todo/:_id
+router.get('/edit/todo/:_id', (req, res) => {
+    const _id = req.params
+    Todo.findOne({'_id': _id})
+    .then((todo) => {
+        res.render('edit',  {todo: todo})
+    })
+    .catch((e) => {
+        console.log(e)
+    })
+})
+
+
+// [POST] /edit/todo/:_id
+router.post('/edit/todo/:_id', (req, res) => {
+    Todo.updateOne({_id : req.params}, {todo: req.body.Editcontent})
+    .then(() => {
+        console.log('Cap nhat thanh cong')
+        res.redirect('/')
+    })
+    .catch(err => console.log(err))
+})
+
+// [GET] /delete/todo/:_id
 router.get('/delete/todo/:_id', (req, res) => {
     const{_id} = req.params
     Todo.deleteOne({_id})
@@ -25,6 +49,7 @@ router.get('/delete/todo/:_id', (req, res) => {
     .catch(err => console.log(err))
 })
 
+// [GET] home
 router.get("/", async(req, res) => {
     const allTodo = await Todo.find()
     res.render('index', {allTodo: allTodo})
